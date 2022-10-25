@@ -8,14 +8,22 @@ class AuthorsController < ApplicationController
     end
 
     def new
+        @author = Author.new
+    end
+
+    def edit
+        @author = Author.find(params[:id])
     end
 
     def create
         @author = Author.new(article_params)
             
         
-        @author.save
-        redirect_to @author
+        if @author.save
+            redirect_to @author
+        else
+            render 'new'
+        end
         #render plain: params[:author].inspect
     end
 
