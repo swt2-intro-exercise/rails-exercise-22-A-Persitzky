@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
       resources :authors
 
-      root 'welcome#index'
+      root 'home#index'
   end
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
