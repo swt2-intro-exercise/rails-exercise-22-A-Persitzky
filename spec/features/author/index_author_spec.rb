@@ -20,4 +20,15 @@ describe "Author index page", type: :feature do
 
     expect(page).to have_link "Edit", href: edit_author_path(@alan)
   end
+
+  it "Should exist a link to delete an author" do
+    @alan = FactoryBot.create :author
+
+    visit authors_path
+
+    old_count = Author.count
+    expect(page).to have_link "Delete", href: author_path(@alan)
+    click_link "Delete"
+    expect(old_count).to eq(Author.count + 1)
+  end
 end
