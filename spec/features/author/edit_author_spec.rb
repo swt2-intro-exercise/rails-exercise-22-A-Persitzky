@@ -8,6 +8,7 @@ describe "Edit author page", type: :feature do
         @author.reload
 
         expect(@author.first_name).to eq("Bob")
+        
 
     end
 end
