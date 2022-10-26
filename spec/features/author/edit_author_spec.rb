@@ -9,7 +9,12 @@ describe "Edit author page", type: :feature do
 
         expect(@author.first_name).to eq("Bob")
 
+        visit edit_author_path(@author)
+        fill_in "author[first_name]", with: "Alan"
+        click_button('Update Author')
+        @author.reload
 
+        expect(@author.first_name).to eq("Alan")
 
     end
 end
