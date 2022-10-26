@@ -9,8 +9,9 @@
 
     <% @authors.each do |author| %>
         <tr>
-            <td><%= author.title %></td>
-            <td><%= author.text %></td>
+            <td><%= author.first_name %></td>
+            <td><%= author.last_name %></td>
+            <td><a href="<%= author.homepage %>"><%= author.homepage %></a></td>
             <td><%= link_to 'Show', author_path(author) %></td>
         </tr>
     <% end %>
