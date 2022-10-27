@@ -9,6 +9,7 @@ class PapersController < ApplicationController
       @paper = Paper.year(params['year'])
     else
       @papers = Paper.all
+    end
   end
 
   # GET /papers/1
