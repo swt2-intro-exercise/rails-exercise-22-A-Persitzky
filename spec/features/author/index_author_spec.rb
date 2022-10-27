@@ -28,7 +28,7 @@ describe "Author index page", type: :feature do
 
     old_count = Author.count
     expect(page).to have_link "Delete", href: author_path(@alan)
-    click_link "Delete"
+    page.find('a', :text => 'Delete', match: :first).click
     expect(old_count).to eq(Author.count + 1)
   end
 end
