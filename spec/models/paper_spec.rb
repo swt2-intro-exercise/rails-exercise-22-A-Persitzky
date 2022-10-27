@@ -7,8 +7,13 @@ RSpec.describe Paper, type: :model do
     expect(@paper).to_not be_valid
   end
   
-  it "Should fail with an empty " do
+  it "Should fail with an empty venue" do
     @paper = Paper.new(:title => "Title", :year => 2022)
+    expect(@paper).to_not be_valid
+  end
+
+  it "Should fail with an empty year" do
+    @paper = Paper.new(:title => "Title", :venue => "venue")
     expect(@paper).to_not be_valid
   end
 
