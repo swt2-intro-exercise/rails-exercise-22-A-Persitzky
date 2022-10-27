@@ -22,5 +22,9 @@ RSpec.describe Paper, type: :model do
     expect(@paper).to_not be_valid
   end
 
-  pending "add some examples to (or delete) #{__FILE__}"
+  #it "Should have an empty authors list" do
+   # @paper = Paper.new(:title => "Title", :venue => "venue", :year => 1234)
+    #expect(@paper).to have 
+
+  #pending "add some examples to (or delete) #{__FILE__}"
 end
