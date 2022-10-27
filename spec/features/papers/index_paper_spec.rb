@@ -21,4 +21,14 @@ describe "Paper index page", type: :feature do
     expect(page).to have_link "Edit", href: edit_paper_path(@paper)
   end
 
+  it "Should exist a link to delete a paper" do
+    @paper = FactoryBot.create :paper
+
+    visit papers_path
+
+    old_count = Paper.count
+    expect(page).to have_link "Delete", href: paper_path(@paper)
+    page.find('a', :text => 'Delete', match: :first).click
+    expect(old_count).to eq(Paper.count + 1)
+  end
 end
