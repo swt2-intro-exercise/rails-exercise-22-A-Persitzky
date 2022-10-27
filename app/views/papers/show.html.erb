@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-Authors: <%= @paper.authors.map { |author| author.name }.join ', ' %>
 <%= render @paper %>
+<b>Authors:</b> <%= @paper.authors.map { |author| author.name }.join ', ' %>
 
 <div>
   <%= link_to "Edit this paper", edit_paper_path(@paper) %> |
