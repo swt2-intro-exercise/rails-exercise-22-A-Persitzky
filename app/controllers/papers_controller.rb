@@ -6,7 +6,7 @@ class PapersController < ApplicationController
   # GET /papers
   def index
     if params['year']
-      @paper = Paper.year(params['year'])
+      @papers = Paper.year(params['year'])
     else
       @papers = Paper.all
     end
