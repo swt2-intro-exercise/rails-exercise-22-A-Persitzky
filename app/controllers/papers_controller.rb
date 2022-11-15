@@ -73,12 +73,12 @@ class PapersController < ApplicationController
 
     # returns LIKE partial matching search
     def create_sql_like(search_term, search_attribute)
-      "#{search_attribute} LIKE '%#{search_term}%'"
+      "#{search_attribute} LIKE '%#{Paper.sanitize_sql_like(search_term)}%'"
     end
 
     # retuns equals expression for filter
     def create_sql_equal(search_value, search_attribute)
-      "#{search_attribute} = '#{search_value}'"
+      "#{search_attribute} = '#{Paper.sanitize_sql_like(search_value)}'"
     end
 
     def relevant_search_attributes
