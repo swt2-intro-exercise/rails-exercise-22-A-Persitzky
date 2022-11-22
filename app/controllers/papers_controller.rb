@@ -13,8 +13,8 @@ class PapersController < ApplicationController
     if params[:search]
       # split search term by words into list.
       all_params = params[:search].split(" ")
-      categories_filter = {"year" => 2022}
-      #categories_filter = {}
+      #categories_filter = {"year" => 2022}
+      categories_filter = {}
       numerical_filter = {"year" => {"lower_bound" => 2000, "upper_bound" => 2023}}
       @papers = search_for_items(params[:search], categories_filter, numerical_filter)
       # for each word and attribute create like clause. Disjuncts attributes and conjucts search_terms.
@@ -90,7 +90,7 @@ class PapersController < ApplicationController
     end
 
     def relevant_search_attributes
-      [:title, :venue]
+      [:title, :venue, :year]
     end
 
     def generate_sql_where_clause(search_term, filter_category = {}, filter_numerical = {})
@@ -100,7 +100,9 @@ class PapersController < ApplicationController
       sql_like_clause = search_terms.map{|term| relevant_search_attributes.map { |attribute| create_sql_like(attribute, term) }.join(" OR ") }.join(" AND ")
       sql_equal_clause = filter_category.map{|key, value| create_sql_equal(key, value)}.join(" AND ")
       sql_between_clause = filter_numerical.map{|key, bounds| create_sql_lower_upper(key, bounds["lower_bound"], bounds["upper_bound"])}.join(" AND ")
-      "(#{sql_like_clause})" + "AND" + "(#{sql_equal_clause})" + "AND" + "(#{sql_between_clause})"
+      #"(#{sql_like_clause})" + "AND" + "(#{sql_equal_clause})" + "AND" + "(#{sql_between_clause})"
+      [sql_like_clause, sql_equal_clause, sql_between_clause].select{|clause| !clause.empty?}.map{|clause| "(#{clause})"}.join(" AND ")
+      
     end 
 
     # search_term: you are looking for relevant search attributes, partially matching search. 
